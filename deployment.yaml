@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcms
+  template:
+    metadata:
+      labels:
+        app: mcms
+    spec:
+      containers:
+        - name: mcms
+          image: $image
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mcms
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+      name: mcms
+      nodePort: 30018
+  selector:
+    app: mcms
+  type: NodePort
