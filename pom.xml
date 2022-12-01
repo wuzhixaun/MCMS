@@ -121,6 +121,9 @@
         <resources>
             <resource>
                 <directory>src/main/webapp</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
 
                 <!--打包生产jar包推荐启用下面配置-->
                 <!--打包生产war包不启用下面配置-->
