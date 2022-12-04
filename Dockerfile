@@ -1,8 +1,12 @@
 FROM adoptopenjdk/openjdk8
 MAINTAINER jackWu <627521884@qq.com>
 
-RUN echo '本地使用mvn clean package'
+RUN mkdir -p /mcms
 
-ADD ./target/ms-mcms.jar ms-mcms.jar
+WORKDIR /mcms
 
-ENTRYPOINT ["java","-jar","/ms-mcms.jar","&"]
+EXPOSE 8080
+
+ADD ./target/s-mcms.jar ./app.jar
+
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]
